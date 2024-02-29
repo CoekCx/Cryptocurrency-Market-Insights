@@ -24,6 +24,13 @@ class CryptoCurrencyDataSet:
     def total_volumes(self):
         return self._total_volumes
 
+    def to_dict(self):
+        return {
+            'prices': self.prices,
+            'market_caps': self.market_caps,
+            'total_volumes': self.total_volumes
+        }
+
     def __repr__(self):
         prices_table = tabulate(self._prices, headers=["Timestamp", "Value"], tablefmt="pretty")
         market_caps_table = tabulate(self._market_caps, headers=["Timestamp", "Value"], tablefmt="pretty")
