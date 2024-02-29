@@ -11,9 +11,11 @@ function CryptoCurrencyOverview() {
         async function fetchBtcData() {
             const response = await fetch('http://127.0.0.1:5000/bitcoin_market_value')
             const responseData = await response.json();
-            setPrices(responseData.prices);
-            setMarketCaps(responseData.market_caps)
-            setTotalVolumes(responseData.total_volumes)
+            if (responseData !== undefined) {
+                setPrices(responseData.prices);
+                setMarketCaps(responseData.market_caps)
+                setTotalVolumes(responseData.total_volumes)
+            }
         }
 
         fetchBtcData();
@@ -21,15 +23,21 @@ function CryptoCurrencyOverview() {
 
     return (
         <div className={classes.cryptoContainer}>
-            <div className={classes.graphContainer}>
-                <Graph title="BTC Price" data={prices}/>
-            </div>
-            <div className={classes.graphContainer}>
-                <Graph title="BTC Market Cap" data={marketCaps}/>
-            </div>
-            <div className={classes.graphContainer}>
-                <Graph title="BTC Total Volume" data={totalVolumes}/>
-            </div>
+            {prices.length > 0 && (
+                <div className={classes.graphContainer}>
+                    <Graph title="BTC Price" data={prices}/>
+                </div>
+            )}
+            {marketCaps.length > 0 && (
+                <div className={classes.graphContainer}>
+                    <Graph title="BTC Market Cap" data={marketCaps}/>
+                </div>
+            )}
+            {totalVolumes.length > 0 && (
+                <div className={classes.graphContainer}>
+                    <Graph title="BTC Total Volume" data={totalVolumes}/>
+                </div>
+            )}
         </div>
     );
 }

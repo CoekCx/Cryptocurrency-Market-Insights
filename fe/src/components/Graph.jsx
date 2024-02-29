@@ -1,8 +1,19 @@
 import React from 'react';
-import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer} from 'recharts';
+import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer} from 'recharts';
 import classes from "./Graph.module.css";
 
 function Graph({title, data}) {
+    const CustomizedDot = (props) => {
+        const {cx, cy} = props;
+
+        return (
+            <svg x={cx - 5} y={cy - 5} width={10} height={10} fill="gray" opacity="0" viewBox="0 0 1024 1024">
+                <circle cx="512" cy="512" r="512"/>
+            </svg>
+        );
+    };
+
+
     function formatTime(timeString) {
         const time = new Date(timeString);
         const hours = time.getHours().toString().padStart(2, '0'); // Get hours and pad with leading zero if needed
@@ -42,7 +53,7 @@ function Graph({title, data}) {
                     />
                     <YAxis stroke="#fff" fontSize="13" tickFormatter={formatYAxis}/>
                     <Tooltip/>
-                    <Line type="monotone" dataKey="value" stroke="#8884d8"/>
+                    <Line type="monotone" dataKey="value" stroke="#F5F5F5" activeDot={{r: 8}} dot={<CustomizedDot/>}/>
                 </LineChart>
             </ResponsiveContainer>
         </>
