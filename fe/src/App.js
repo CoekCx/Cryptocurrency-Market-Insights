@@ -1,12 +1,12 @@
 import './App.css';
 import Header from "./components/Header"
-import DayGraph from "./components/DayGraph";
+import CryptoCurrencyOverview from "./components/CryptoCurrencyOverview";
 
 function App() {
     return (
         <div className="App">
             <Header/>
-            <DayGraph/>
+            <CryptoCurrencyOverview/>
         </div>
     );
 }

@@ -26,9 +26,18 @@ class CryptoCurrencyDataSet:
 
     def to_dict(self):
         return {
-            'prices': self.prices,
-            'market_caps': self.market_caps,
-            'total_volumes': self.total_volumes
+            'prices': [{
+                'datetime': time_point,
+                'value': value
+            } for time_point, value in self.prices],
+            'market_caps': [{
+                'datetime': time_point,
+                'value': value
+            } for time_point, value in self.market_caps],
+            'total_volumes': [{
+                'datetime': time_point,
+                'value': value
+            } for time_point, value in self.total_volumes],
         }
 
     def __repr__(self):
