@@ -1,12 +1,12 @@
 import './App.css';
 import Header from "./components/Header"
-import CryptoCurrencyOverview from "./components/CryptoCurrencyOverview";
+import GraphMenu from "./components/GraphMenu";
 
 function App() {
     return (
         <div className="App">
             <Header/>
-            <CryptoCurrencyOverview/>
+            <GraphMenu/>
         </div>
     );
 }

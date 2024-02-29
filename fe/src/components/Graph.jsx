@@ -2,7 +2,7 @@ import React from 'react';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer} from 'recharts';
 import classes from "./Graph.module.css";
 
-function Graph({title, data}) {
+function Graph({data}) {
     const CustomizedDot = (props) => {
         const {cx, cy} = props;
 
@@ -38,7 +38,6 @@ function Graph({title, data}) {
 
     return (
         <>
-            <h1 className={classes.title}>{title}</h1>
             <ResponsiveContainer height={500}>
                 <LineChart data={data}>
                     <CartesianGrid stroke="#eee" strokeDasharray="5 5" strokeWidth="0.5"/>
@@ -52,7 +51,8 @@ function Graph({title, data}) {
                         fontSize="13"
                     />
                     <YAxis stroke="#fff" fontSize="13" tickFormatter={formatYAxis}/>
-                    <Tooltip/>
+                    <Tooltip contentStyle={{background: "black", opacity: "0.65"}} labelStyle={{color: "white"}}
+                             itemStyle={{color: "white"}}/>
                     <Line type="monotone" dataKey="value" stroke="#F5F5F5" activeDot={{r: 8}} dot={<CustomizedDot/>}/>
                 </LineChart>
             </ResponsiveContainer>
