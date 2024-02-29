@@ -52,13 +52,3 @@
     color: #273133;
     opacity: 0.65;
 }
-
-#tab-content {
-    background-color: #2d3942;
-    border-radius: 0 4px 4px 4px;
-    padding: 1rem;
-}
-
-#tab-content li {
-    margin: 0.75rem 0;
-}

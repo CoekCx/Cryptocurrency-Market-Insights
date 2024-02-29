@@ -34,34 +34,32 @@ function GraphMenu() {
         </div>
     ))
 
+    const menuButtonTexts = [
+        {text: 'Price'},
+        {text: 'Market Cap'},
+        {text: 'Total Volume'},
+    ]
+
+    const buttonsMenu = (
+        <menu>
+            {menuButtonTexts.map((btn, index) => (
+                <button
+                    key={index}
+                    className={activeGraphIndex === index ? classes.active : ""}
+                    onClick={() => setActiveGraphIndex(index)}
+                >
+                    {btn.text}
+                </button>
+            ))}
+        </menu>
+    );
+
     return (
         <div className={classes.cryptoContainer}>
             <div className={classes.tabs}>
-                <menu>
-                    <button
-                        className={activeGraphIndex === 0 ? classes.active : ""}
-                        onClick={() => setActiveGraphIndex(0)}
-                    >
-                        Price
-                    </button>
-                    <button
-                        className={activeGraphIndex === 1 ? classes.active : ""}
-                        onClick={() => setActiveGraphIndex(1)}
-                    >
-                        Market Cap
-                    </button>
-                    <button
-                        className={activeGraphIndex === 2 ? classes.active : ""}
-                        onClick={() => setActiveGraphIndex(2)}
-                    >
-                        Total Volume
-                    </button>
-                </menu>
-                <div id="tab-content">
-                    {graphs[activeGraphIndex]}
-                </div>
+                {buttonsMenu}
+                {graphs[activeGraphIndex]}
             </div>
-
         </div>
     );
 }
