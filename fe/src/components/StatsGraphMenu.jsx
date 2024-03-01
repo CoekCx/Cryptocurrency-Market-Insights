@@ -10,7 +10,8 @@ function StatsGraphMenu({
                             initPricesStats,
                             initMarketCapsStats,
                             initTotalVolumesStats,
-                            initCorrelationMatrix
+                            initCorrelationMatrix,
+                            currencySymbol
                         }) {
     const prices = initPrices;
     const marketCaps = initMarketCaps;
@@ -41,7 +42,7 @@ function StatsGraphMenu({
 
     const statsCards = statsData.map(statsDataPoint => (
         <StatsCard title={statsDataPoint.title} statsData={statsDataPoint.statsData}
-                   correlationData={statsDataPoint.correlationData}/>
+                   correlationData={statsDataPoint.correlationData} currencySymbol={currencySymbol}/>
     ))
 
     const menuButtonTexts = [

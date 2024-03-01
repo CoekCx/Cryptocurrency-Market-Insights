@@ -10,7 +10,6 @@ function CurrencyDropdown({values, onChange}) {
 
     const handleCurrencySelect = (value) => {
         setSelectedCurrency(<>{value.icon} {value.name}</>);
-        console.log(`Calling change with value: ${value.text}`)
         onChange(value.text);
     };
 

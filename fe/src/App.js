@@ -22,15 +22,17 @@ function App() {
         setSelectedCryptoCurrency(value);
     }
 
+    const currencySymbolMap = {
+        usd: '$',
+        eur: '€',
+        gbp: '£'
+    };
+
     useEffect(() => {
         async function fetchBtcData() {
             const url = `http://127.0.0.1:5000/get_crypto_stats/${selectedCurrency}/${selectedCryptoCurrency}`
-            console.log(url)
-            console.log(`currency: ${selectedCurrency}`)
-            console.log(`cryptocurrency: ${selectedCryptoCurrency}`)
             const response = await fetch(url)
             const responseData = await response.json();
-            console.log(responseData); // Logging responseData to console
             if (responseData !== undefined) {
                 setPrices(responseData.prices);
                 setMarketCaps(responseData.market_caps)
@@ -57,6 +59,7 @@ function App() {
                 initMarketCapsStats={marketCapsStats}
                 initTotalVolumesStats={totalVolumesStats}
                 initCorrelationMatrix={correlationMatrix}
+                currencySymbol={currencySymbolMap[selectedCurrency]}
             />
         </div>
     );

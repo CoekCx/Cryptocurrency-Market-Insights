@@ -1,7 +1,7 @@
 import StatWithToolTip from './StatWithToolTip'
 import classes from './StatsCard.module.css';
 
-function StatsCard({title, statsData, correlationData}) {
+function StatsCard({title, statsData, correlationData, currencySymbol}) {
     const currentStatType = title.slice(0, -6).toLowerCase() + 's';
 
     const roundDecimals = (value, numberOfDecimals = 2) => {
@@ -46,43 +46,43 @@ function StatsCard({title, statsData, correlationData}) {
             title: 'The Mean',
             body: `The average value of ${currentStatType} in the dataset.`,
             label: 'Mean:',
-            value: `${roundDecimals(statsData.mean)}$`
+            value: `${roundDecimals(statsData.mean)} ${currencySymbol}`
         },
         {
             title: 'The Standard Deviation',
             body: `The standard deviation of ${currentStatType} in the dataset.`,
             label: 'Standard Deviation:',
-            value: `${roundDecimals(statsData.std)}$`
+            value: `${roundDecimals(statsData.std)} ${currencySymbol}`
         },
         {
             title: 'The Minimum',
             body: `The minimum value of ${currentStatType} in the dataset.`,
             label: 'Minimum:',
-            value: `${roundDecimals(statsData.min)}$`
+            value: `${roundDecimals(statsData.min)} ${currencySymbol}`
         },
         {
             title: 'The First Quartile',
             body: `The 25th percentile of ${currentStatType} in the dataset.`,
             label: '25%:',
-            value: `${roundDecimals(statsData['25%'])}$`
+            value: `${roundDecimals(statsData['25%'])} ${currencySymbol}`
         },
         {
             title: 'The Median',
             body: `The 50th percentile of ${currentStatType} in the dataset.`,
             label: '50%:',
-            value: `${roundDecimals(statsData['50%'])}$`
+            value: `${roundDecimals(statsData['50%'])} ${currencySymbol}`
         },
         {
             title: 'The Third Quartile',
             body: `The 75th percentile of ${currentStatType} in the dataset.`,
             label: '75%:',
-            value: `${roundDecimals(statsData['75%'])}$`
+            value: `${roundDecimals(statsData['75%'])} ${currencySymbol}`
         },
         {
             title: 'The Maximum',
             body: `The maximum value of ${currentStatType} in the dataset.`,
             label: 'Maximum:',
-            value: `${roundDecimals(statsData.max)}$`
+            value: `${roundDecimals(statsData.max)} ${currencySymbol}`
         },
     ];
 
