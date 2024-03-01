@@ -4,23 +4,24 @@ import time
 
 class CoinGeckoApi:
     base_url = "https://api.coingecko.com/api/v3"
-    btc_data = None
-    last_fetch_time = 0
+    last_received_data = {}
+    last_fetch_times = {}  # Dictionary to store last fetch time for each combination
     fetch_interval = 1800  # 30 minutes in seconds
 
     @staticmethod
-    def get_bitcoin_market_data():
+    def get_crypto_market_data(cryptocurrency, vs_currency):
         current_time = time.time()
-        if CoinGeckoApi.btc_data and current_time - CoinGeckoApi.last_fetch_time < CoinGeckoApi.fetch_interval:
-            return CoinGeckoApi.btc_data
+        last_fetch_time = CoinGeckoApi.last_fetch_times.get((cryptocurrency, vs_currency), 0)
+        if current_time - last_fetch_time < CoinGeckoApi.fetch_interval:
+            return CoinGeckoApi.last_received_data.get((cryptocurrency, vs_currency))
 
         try:
-            # Endpoint to get market data for Bitcoin
-            endpoint = "/coins/bitcoin/market_chart"
+            # Endpoint to get market data for specified cryptocurrency
+            endpoint = f"/coins/{cryptocurrency}/market_chart"
 
-            # Parameters to specify data range (past 24 hours)
+            # Parameters to specify data range (past 24 hours) and currency
             params = {
-                "vs_currency": "usd",
+                "vs_currency": vs_currency,
                 "days": "1"
             }
 
@@ -31,30 +32,31 @@ class CoinGeckoApi:
             if response.status_code == 200:
                 print('Fetched data from API')
                 data = response.json()
-                CoinGeckoApi.btc_data = data
-                CoinGeckoApi.last_fetch_time = current_time
+                CoinGeckoApi.last_fetch_times[(cryptocurrency, vs_currency)] = current_time
+                CoinGeckoApi.last_received_data[(cryptocurrency, vs_currency)] = data
                 return data
             else:
                 # Handle error response
                 return None
         except Exception as e:
-            print(f"Error fetching Bitcoin market value: {e}")
+            print(f"Error fetching {cryptocurrency} market data: {e}")
             return None
 
     @staticmethod
-    def get_current_bitcoin_market_value():
+    def get_current_crypto_market_value(cryptocurrency, vs_currency):
         current_time = time.time()
-        if CoinGeckoApi.last_fetch_time and current_time - CoinGeckoApi.last_fetch_time < CoinGeckoApi.fetch_interval:
+        last_fetch_time = CoinGeckoApi.last_fetch_times.get((cryptocurrency, vs_currency), 0)
+        if current_time - last_fetch_time < CoinGeckoApi.fetch_interval:
             # If within the fetch interval, return the previously fetched market value
-            return CoinGeckoApi.btc_data["prices"][-1][1]
+            return CoinGeckoApi.last_received_data.get((cryptocurrency, vs_currency))["prices"][-1][1]
 
         try:
-            # Endpoint to get market data for Bitcoin
-            endpoint = "/coins/bitcoin/market_chart"
+            # Endpoint to get market data for specified cryptocurrency
+            endpoint = f"/coins/{cryptocurrency}/market_chart"
 
-            # Parameters to specify data range (past 24 hours)
+            # Parameters to specify data range (past 24 hours) and currency
             params = {
-                "vs_currency": "usd",
+                "vs_currency": vs_currency,
                 "days": "1"
             }
 
@@ -65,13 +67,14 @@ class CoinGeckoApi:
             if response.status_code == 200:
                 print('Fetched data from API')
                 data = response.json()
-                # Extract market value for Bitcoin from the response
+                # Extract market value for specified cryptocurrency from the response
                 market_value = data["prices"][-1][1]  # Last element of prices list contains market value
-                CoinGeckoApi.last_fetch_time = current_time
+                CoinGeckoApi.last_fetch_times[(cryptocurrency, vs_currency)] = current_time
+                CoinGeckoApi.last_received_data[(cryptocurrency, vs_currency)] = data
                 return market_value
             else:
                 # Handle error response
                 return None
         except Exception as e:
-            print(f"Error fetching Bitcoin market value: {e}")
+            print(f"Error fetching {cryptocurrency} market value: {e}")
             return None
