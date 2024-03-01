@@ -1,58 +1,105 @@
+import StatWithToolTip from './StatWithToolTip'
 import classes from './StatsCard.module.css';
 
 function StatsCard({title, statsData, correlationData}) {
-    const roundDecimals = (value, numberOfDecimals = 4) => {
-        return Number.parseFloat(value).toFixed(numberOfDecimals);
+    const currentStatType = title.slice(0, -6).toLowerCase() + 's';
+
+    const roundDecimals = (value, numberOfDecimals = 2) => {
+        // Check if the value is a number
+        if (typeof value !== 'number') {
+            return value; // Return the value unchanged if it's not a number
+        }
+
+        // Round the value to the specified number of decimals
+        const roundedValue = Number.parseFloat(value).toFixed(numberOfDecimals);
+
+        // Convert the rounded value to a string with commas as thousand separators
+        return roundedValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     };
+
+    const stats = [
+        {
+            title: 'Prices vs Market Caps',
+            body: `The correlation coefficient between prices and market capitalizations.`,
+            label: 'Correlation (P-MC):',
+            value: `${roundDecimals(correlationData.prices_vs_market_caps * 100)}%`
+        },
+        {
+            title: 'Prices vs Total Volumes',
+            body: `The correlation coefficient between prices and total volumes`,
+            label: 'Correlation (P-TV):',
+            value: `${roundDecimals(correlationData.prices_vs_total_volumes * 100)}%`
+        },
+        {
+            title: 'Market Caps vs Total Volumes',
+            body: `The correlation coefficient between market capitalizations and total volumes.`,
+            label: 'Correlation (MC-TV):',
+            value: `${roundDecimals(correlationData.market_caps_vs_total_volumes * 100)}%`
+        },
+        {
+            title: 'The Count',
+            body: `Number of data points in the ${currentStatType} dataset.`,
+            label: 'Count:',
+            value: statsData.count
+        },
+        {
+            title: 'The Mean',
+            body: `The average value of ${currentStatType} in the dataset.`,
+            label: 'Mean:',
+            value: `${roundDecimals(statsData.mean)}$`
+        },
+        {
+            title: 'The Standard Deviation',
+            body: `The standard deviation of ${currentStatType} in the dataset.`,
+            label: 'Standard Deviation:',
+            value: `${roundDecimals(statsData.std)}$`
+        },
+        {
+            title: 'The Minimum',
+            body: `The minimum value of ${currentStatType} in the dataset.`,
+            label: 'Minimum:',
+            value: `${roundDecimals(statsData.min)}$`
+        },
+        {
+            title: 'The First Quartile',
+            body: `The 25th percentile of ${currentStatType} in the dataset.`,
+            label: '25%:',
+            value: `${roundDecimals(statsData['25%'])}$`
+        },
+        {
+            title: 'The Median',
+            body: `The 50th percentile of ${currentStatType} in the dataset.`,
+            label: '50%:',
+            value: `${roundDecimals(statsData['50%'])}$`
+        },
+        {
+            title: 'The Third Quartile',
+            body: `The 75th percentile of ${currentStatType} in the dataset.`,
+            label: '75%:',
+            value: `${roundDecimals(statsData['75%'])}$`
+        },
+        {
+            title: 'The Maximum',
+            body: `The maximum value of ${currentStatType} in the dataset.`,
+            label: 'Maximum:',
+            value: `${roundDecimals(statsData.max)}$`
+        },
+    ];
+
+    const statsElements = stats.map((stat, index) => (
+        <StatWithToolTip title={stat.title} body={stat.body}>
+            <div className={classes.dataRow} key={index}>
+                <p className={classes.label}>{stat.label}</p>
+                <p className={classes.value}>{stat.value}</p>
+            </div>
+        </StatWithToolTip>
+    ))
 
     return (
         <div className={classes.card}>
             <h1 className={classes.title}>{title}</h1>
 
-            <div className={classes.dataRow}>
-                <p className={classes.label}>Count:</p>
-                <p className={classes.value}>{statsData.count}</p>
-            </div>
-            <div className={classes.dataRow}>
-                <p className={classes.label}>Mean:</p>
-                <p className={classes.value}>{roundDecimals(statsData.mean)}</p>
-            </div>
-            <div className={classes.dataRow}>
-                <p className={classes.label}>Standard Deviation:</p>
-                <p className={classes.value}>{roundDecimals(statsData.std)}</p>
-            </div>
-            <div className={classes.dataRow}>
-                <p className={classes.label}>Minimum:</p>
-                <p className={classes.value}>{roundDecimals(statsData.min)}</p>
-            </div>
-            <div className={classes.dataRow}>
-                <p className={classes.label}>25%:</p>
-                <p className={classes.value}>{roundDecimals(statsData['25%'])}</p>
-            </div>
-            <div className={classes.dataRow}>
-                <p className={classes.label}>50%:</p>
-                <p className={classes.value}>{roundDecimals(statsData['50%'])}</p>
-            </div>
-            <div className={classes.dataRow}>
-                <p className={classes.label}>75%:</p>
-                <p className={classes.value}>{roundDecimals(statsData['75%'])}</p>
-            </div>
-            <div className={classes.dataRow}>
-                <p className={classes.label}>Maximum:</p>
-                <p className={classes.value}>{roundDecimals(statsData.max)}</p>
-            </div>
-            <div className={classes.dataRow}>
-                <p className={classes.label}>Correlation (P-MC):</p>
-                <p className={classes.value}>{roundDecimals(correlationData.prices_vs_market_caps * 100, 2)}%</p>
-            </div>
-            <div className={classes.dataRow}>
-                <p className={classes.label}>Correlation (P-TV):</p>
-                <p className={classes.value}>{roundDecimals(correlationData.prices_vs_total_volumes * 100, 2)}%</p>
-            </div>
-            <div className={classes.dataRow}>
-                <p className={classes.label}>Correlation (MC-TV):</p>
-                <p className={classes.value}>{roundDecimals(correlationData.market_caps_vs_total_volumes * 100, 2)}%</p>
-            </div>
+            {statsElements}
         </div>
     );
 }
