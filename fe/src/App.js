@@ -1,12 +1,12 @@
 import './App.css';
 import Header from "./components/Header"
-import GraphMenu from "./components/GraphMenu";
+import StatsGraphMenu from "./components/StatsGraphMenu";
 
 function App() {
     return (
         <div className="App">
             <Header/>
-            <GraphMenu/>
+            <StatsGraphMenu/>
         </div>
     );
 }

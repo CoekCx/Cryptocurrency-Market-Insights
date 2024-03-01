@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
 import Graph from "./Graph";
 import StatsCard from "./StatsCard";
-import classes from "./GraphMenu.module.css"
+import classes from "./StatsGraphMenu.module.css"
 
-function GraphMenu() {
+function StatsGraphMenu() {
     const [prices, setPrices] = useState([])
     const [marketCaps, setMarketCaps] = useState([])
     const [totalVolumes, setTotalVolumes] = useState([])
@@ -87,4 +87,4 @@ function GraphMenu() {
     );
 }
 
-export default GraphMenu;
+export default StatsGraphMenu;
