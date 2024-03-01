@@ -1,6 +1,5 @@
 import React from 'react';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer} from 'recharts';
-import classes from "./Graph.module.css";
 
 function Graph({data}) {
     const CustomizedDot = (props) => {
@@ -12,7 +11,6 @@ function Graph({data}) {
             </svg>
         );
     };
-
 
     function formatTime(timeString) {
         const time = new Date(timeString);
@@ -38,7 +36,7 @@ function Graph({data}) {
 
     return (
         <>
-            <ResponsiveContainer height={500}>
+            <ResponsiveContainer height={600}>
                 <LineChart data={data}>
                     <CartesianGrid stroke="#eee" strokeDasharray="5 5" strokeWidth="0.5"/>
                     <XAxis

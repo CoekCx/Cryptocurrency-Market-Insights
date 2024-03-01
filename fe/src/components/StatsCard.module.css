@@ -1,0 +1,43 @@
+.card {
+    height: 640px;
+    border: 1px solid #FFF;
+    border-bottom-left-radius: 8px;
+    box-shadow: 0 22px 24px rgba(0, 0, 0, 0.1);
+    width: 35%;
+}
+
+.dataRow {
+    display: flex; /* Change display to flex */
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+    animation: animate-in 1s ease-out forwards;
+}
+
+.label {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #F5F5F5;
+    margin-left: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    flex: 1; /* Add flex property */
+}
+
+.value {
+    font-size: 1.25rem;
+    color: #F5F5F5;
+    font-style: italic;
+    margin-right: 25px;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+.title {
+    color: whitesmoke;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: "Kanit ExtraLight";
+}

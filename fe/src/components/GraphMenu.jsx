@@ -1,11 +1,16 @@
 import {useEffect, useState} from "react";
 import Graph from "./Graph";
+import StatsCard from "./StatsCard";
 import classes from "./GraphMenu.module.css"
 
 function GraphMenu() {
     const [prices, setPrices] = useState([])
     const [marketCaps, setMarketCaps] = useState([])
     const [totalVolumes, setTotalVolumes] = useState([])
+    const [pricesStats, setPrices_stats] = useState([])
+    const [marketCapsStats, setMarketCapsStats] = useState([])
+    const [totalVolumesStats, setTotalVolumesStats] = useState([])
+    const [correlationMatrix, setCorrelationMatrix] = useState([])
     const [activeGraphIndex, setActiveGraphIndex] = useState(0);
 
     useEffect(() => {
@@ -16,6 +21,10 @@ function GraphMenu() {
                 setPrices(responseData.prices);
                 setMarketCaps(responseData.market_caps)
                 setTotalVolumes(responseData.total_volumes)
+                setPrices_stats(responseData.prices_stats)
+                setMarketCapsStats(responseData.market_caps_stats)
+                setTotalVolumesStats(responseData.total_volumes_stats)
+                setCorrelationMatrix(responseData.correlation_matrix)
             }
         }
 
@@ -32,6 +41,17 @@ function GraphMenu() {
         <div className={classes.graphContainer}>
             <Graph title={graphDataPoint.title} data={graphDataPoint.data}/>
         </div>
+    ))
+
+    const statsData = [
+        {title: 'Price Stats', statsData: pricesStats, correlationData: correlationMatrix},
+        {title: 'Market Cap Stats', statsData: marketCapsStats, correlationData: correlationMatrix},
+        {title: 'Total Volume Stats', statsData: totalVolumesStats, correlationData: correlationMatrix}
+    ]
+
+    const statsCards = statsData.map(statsDataPoint => (
+        <StatsCard title={statsDataPoint.title} statsData={statsDataPoint.statsData}
+                   correlationData={statsDataPoint.correlationData}/>
     ))
 
     const menuButtonTexts = [
@@ -58,7 +78,10 @@ function GraphMenu() {
         <div className={classes.cryptoContainer}>
             <div className={classes.tabs}>
                 {buttonsMenu}
-                {graphs[activeGraphIndex]}
+                <div className={classes.dashboard}>
+                    {statsCards[activeGraphIndex]}
+                    {graphs[activeGraphIndex]}
+                </div>
             </div>
         </div>
     );
