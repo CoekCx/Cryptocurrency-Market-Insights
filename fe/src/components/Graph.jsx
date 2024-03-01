@@ -35,6 +35,15 @@ function Graph({data}) {
         }
     }
 
+    // Find the minimum and maximum values in the data
+    const min = Math.min(...data.map(entry => entry.value));
+    const max = Math.max(...data.map(entry => entry.value));
+
+    // Add a margin around the min and max values
+    const margin = 0.1 * (max - min);
+    const minY = min - margin;
+    const maxY = max + margin;
+
     return (
         <>
             <ResponsiveContainer height={600}>
@@ -50,7 +59,13 @@ function Graph({data}) {
                         fontSize="13"
                         className={classes.graph}
                     />
-                    <YAxis stroke="#fff" fontSize="13" tickFormatter={formatYAxis} className={classes.graph}/>
+                    <YAxis
+                        stroke="#fff"
+                        fontSize="13"
+                        tickFormatter={formatYAxis}
+                        className={classes.graph}
+                        domain={[minY, maxY]} // Set the domain to adjust the y-axis scale
+                    />
                     <Tooltip contentStyle={{background: "black", opacity: "0.65"}} labelStyle={{color: "white"}}
                              itemStyle={{color: "white"}} className={classes.graph}/>
                     <Line type="monotone" dataKey="value" stroke="#F5F5F5" activeDot={{r: 8}} dot={<CustomizedDot/>}
