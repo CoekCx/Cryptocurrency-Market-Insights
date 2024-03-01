@@ -1,0 +1,67 @@
+.cryptoContainer {
+    display: grid;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(80%, 80%));
+    animation: fadeIn 0.5s ease;
+}
+
+.dashboard {
+    display: flex;
+}
+
+.graphContainer {
+    width: 100%;
+    height: 640px;
+    border: 1px solid #FFF;
+    border-bottom-right-radius: 8px;
+    box-shadow: 0 22px 24px rgba(0, 0, 0, 0.1);
+    padding-top: 20px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.tabs {
+    overflow: hidden;
+}
+
+.tabs menu {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 0.25rem;
+}
+
+.tabs button {
+    width: 33.3%;
+    font: inherit;
+    font-size: 22px;
+    background-color: transparent;
+    border: none;
+    border-bottom-color: #48d9f3;
+    color: #e0eff1;
+    border-radius: 4px 4px 0 0;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+}
+
+.tabs button:hover,
+.tabs button.active {
+    background-color: #F5F5F5;
+    color: #273133;
+    opacity: 0.65;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

@@ -1,0 +1,56 @@
+.card {
+    height: 640px;
+    border: 1px solid #FFF;
+    border-bottom-left-radius: 8px;
+    box-shadow: 0 22px 24px rgba(0, 0, 0, 0.1);
+    width: 35%;
+    animation: fadeIn 0.5s ease;
+}
+
+.dataRow {
+    display: flex; /* Change display to flex */
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+    animation: animate-in 1s ease-out forwards;
+}
+
+.label {
+    font-size: 1.25rem;
+    font-weight: normal;
+    color: #F5F5F5;
+    margin-left: 25px;
+    margin-top: 8.5px;
+    margin-bottom: 8.5px;
+    text-transform: uppercase;
+    flex: 1; /* Add flex property */
+}
+
+.value {
+    font-size: 1.25rem;
+    color: #F5F5F5;
+    font-style: italic;
+    margin-right: 25px;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+.title {
+    color: whitesmoke;
+    text-align: center;
+    font-size: 2.3rem;
+    font-weight: lighter;
+    letter-spacing: 2.5px;
+    border-bottom: 1px solid whitesmoke;
+    padding-bottom: 12.5px;
+    margin: 17.5px 25px 5px 25px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

@@ -1,0 +1,36 @@
+/* Custom styles for the popover */
+.popover {
+    max-width: 300px; /* Adjust the maximum width as needed */
+    border: 1px solid whitesmoke; /* Border color */
+    border-radius: 15px; /* Rounded corners */
+    background-color: transparent;
+}
+
+/* Header styles */
+.popoverHeader {
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 16px;
+    background-color: rgba(52, 58, 64, 0.75); /* Dark background color with opacity 0.5 */
+    color: whitesmoke; /* Text color */
+    border-bottom: 0.4px solid gray; /* Bottom border */
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
+/* Body styles */
+.popoverBody {
+    background-color: rgba(35, 39, 43, 0.75);
+    padding: 10px; /* Padding around the body content */
+    color: whitesmoke; /* Text color */
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+/* Arrow styles */
+.popover .arrow::before {
+    border-top-color: #fff; /* Match the background color of the popover */
+}
