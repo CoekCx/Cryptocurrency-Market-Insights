@@ -4,6 +4,7 @@
     border-bottom-left-radius: 8px;
     box-shadow: 0 22px 24px rgba(0, 0, 0, 0.1);
     width: 35%;
+    animation: fadeIn 0.5s ease;
 }
 
 .dataRow {
@@ -43,4 +44,13 @@
     border-bottom: 1px solid whitesmoke;
     padding-bottom: 12.5px;
     margin: 17.5px 25px 5px 25px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

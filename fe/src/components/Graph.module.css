@@ -1,4 +1,12 @@
-.title {
-    text-align: center; /* Center-align the title */
-    color: white;
+.graph {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

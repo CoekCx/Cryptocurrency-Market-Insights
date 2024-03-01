@@ -1,5 +1,6 @@
 import React from 'react';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer} from 'recharts';
+import classes from './Graph.module.css'
 
 function Graph({data}) {
     const CustomizedDot = (props) => {
@@ -38,7 +39,7 @@ function Graph({data}) {
         <>
             <ResponsiveContainer height={600}>
                 <LineChart data={data}>
-                    <CartesianGrid stroke="#eee" strokeDasharray="5 5" strokeWidth="0.5"/>
+                    <CartesianGrid stroke="#eee" strokeDasharray="5 5" strokeWidth="0.5" className={classes.graph}/>
                     <XAxis
                         dataKey="datetime"
                         stroke="#fff"
@@ -47,11 +48,13 @@ function Graph({data}) {
                         textAnchor="end"
                         tickFormatter={formatTime}
                         fontSize="13"
+                        className={classes.graph}
                     />
-                    <YAxis stroke="#fff" fontSize="13" tickFormatter={formatYAxis}/>
+                    <YAxis stroke="#fff" fontSize="13" tickFormatter={formatYAxis} className={classes.graph}/>
                     <Tooltip contentStyle={{background: "black", opacity: "0.65"}} labelStyle={{color: "white"}}
-                             itemStyle={{color: "white"}}/>
-                    <Line type="monotone" dataKey="value" stroke="#F5F5F5" activeDot={{r: 8}} dot={<CustomizedDot/>}/>
+                             itemStyle={{color: "white"}} className={classes.graph}/>
+                    <Line type="monotone" dataKey="value" stroke="#F5F5F5" activeDot={{r: 8}} dot={<CustomizedDot/>}
+                          className={classes.graph}/>
                 </LineChart>
             </ResponsiveContainer>
         </>
