@@ -1,35 +1,25 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import Graph from "./Graph";
 import StatsCard from "./StatsCard";
 import classes from "./StatsGraphMenu.module.css"
 
-function StatsGraphMenu() {
-    const [prices, setPrices] = useState([])
-    const [marketCaps, setMarketCaps] = useState([])
-    const [totalVolumes, setTotalVolumes] = useState([])
-    const [pricesStats, setPrices_stats] = useState([])
-    const [marketCapsStats, setMarketCapsStats] = useState([])
-    const [totalVolumesStats, setTotalVolumesStats] = useState([])
-    const [correlationMatrix, setCorrelationMatrix] = useState([])
+function StatsGraphMenu({
+                            initPrices,
+                            initMarketCaps,
+                            initTotalVolumes,
+                            initPricesStats,
+                            initMarketCapsStats,
+                            initTotalVolumesStats,
+                            initCorrelationMatrix
+                        }) {
+    const prices = initPrices;
+    const marketCaps = initMarketCaps;
+    const totalVolumes = initTotalVolumes;
+    const pricesStats = initPricesStats;
+    const marketCapsStats = initMarketCapsStats;
+    const totalVolumesStats = initTotalVolumesStats;
+    const correlationMatrix = initCorrelationMatrix;
     const [activeGraphIndex, setActiveGraphIndex] = useState(0);
-
-    useEffect(() => {
-        async function fetchBtcData() {
-            const response = await fetch('http://127.0.0.1:5000/bitcoin_market_value')
-            const responseData = await response.json();
-            if (responseData !== undefined) {
-                setPrices(responseData.prices);
-                setMarketCaps(responseData.market_caps)
-                setTotalVolumes(responseData.total_volumes)
-                setPrices_stats(responseData.prices_stats)
-                setMarketCapsStats(responseData.market_caps_stats)
-                setTotalVolumesStats(responseData.total_volumes_stats)
-                setCorrelationMatrix(responseData.correlation_matrix)
-            }
-        }
-
-        fetchBtcData();
-    }, [])
 
     const graphData = [
         {data: prices},
